@@ -1,11 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>tailwind CSS</title>
+    <style>
+        .meu-botao {
+            background-color: #3b82f6;
+            /* Verde */
+            padding: 8px 10px;
+            /* Espaçamento interno */
+            border-radius: 4px;
+            /* Bordas arredondadas */
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    
+
+<body class="bg-blue-100 sm:mx-auto sm:mt-10 p-4 md:max-w-[768px] md:mx-auto md:mt-10 lg:max-w-[1024px] lg:mx-auto lg:mt-10">
+
+
+    <button class="meu-botao">Clique aqui</button>
+
+    <br><br><br>
+
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Botão com Tailwind CSS
+    </button>
+
+
+    <div class="bg-slate-100 shadow-md rounded-lg p-4 max-w-md mx-auto pt-5">
+        <h2 class="text-2xl font-bold mb-2">Tailwind CSS</h2>
+        <p class="text-gray-700 text-sm leading-relaxed">Este é um exemplo de uso do Tailwind CSS em um projeto HTML.</p>
+    </div>
+
+        <br><br><br>
+
+    <nav class="flex justify-between items-center bg-gray-100 p-4">
+        <span>Logo</span>
+        <div class="flex gap-4">
+            <a href="#" class="text-blue-400 hover:text-blue-600">Início</a>
+             <a href="#" class="text-blue-400 hover:text-blue-600">Sobre</a>
+        </div>
+    </nav>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Enviar
+            </button>
+        </div>
+
+
+
 </body>
+
 </html>
