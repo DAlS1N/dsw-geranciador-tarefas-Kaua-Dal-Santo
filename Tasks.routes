@@ -1,0 +1,45 @@
+// @ts-ignore
+import { Router } from 'express';
+import db from './db';
+
+const router = Router();
+
+// ----- Rotas -----
+
+router.get("/api/tasks", (req, res) => {
+    const tarefas = db.prepare("SELECT * FROM tarefas").all();
+    res.json(tarefas);
+});
+
+router.post("/api/tasks", (req, res) => {
+    const { titulo, descricao, estado } = req.body;
+
+    if (!titulo || !descricao) {
+        return res.status(400).json({ message: "titulo e descricao são obrigatórios." });
+    }
+
+    const insert = db.prepare(
+        "INSERT INTO tarefas (titulo, descricao, estado) VALUES (?, ?, ?)"
+    );
+    const resultado = insert.run(titulo, descricao, estado || 'Pendente');
+
+    const novaTarefa = db
+        .prepare("SELECT * FROM tarefas WHERE id = ?")
+        .get(resultado.lastInsertRowid);
+
+    res.status(201).json(novaTarefa);
+});
+
+router.delete("/api/tasks/:id", (req, res) => {
+    const idParaDeletar = parseInt(req.params.id);
+
+    const tarefaExiste = db.prepare("SELECT id FROM tarefas WHERE id = ?").get(idParaDeletar);
+    if (!tarefaExiste) {
+        return res.status(404).json({ message: "Tarefa não encontrada." });
+    }
+
+    db.prepare("DELETE FROM tarefas WHERE id = ?").run(idParaDeletar);
+    res.json({ message: "Tarefa removida com sucesso!" });
+});
+
+export default router;
